@@ -1,5 +1,6 @@
 import Display from "./Display.js"
 import useLight from "../hooks/useLight.js"
+import { useState } from "react"
 
 const styles = {
     board:{
@@ -7,7 +8,7 @@ const styles = {
         border: '1px solid rgb(191, 181, 197)',
         justifyContent: 'space-between',
     },
-    on:{
+    on_button:{
         border: 'none',
         color: 'white',
         width: '50%',
@@ -17,7 +18,7 @@ const styles = {
         backgroundColor: 'greenyellow',
     },
     
-    off:{
+    off_button:{
         border: 'none',
         color: 'white',
         padding: '20px',
@@ -26,16 +27,28 @@ const styles = {
         fontSize: '30px',
         backgroundColor: 'red',
     },
+    on:{
+        border: 'none',
+        color: 'greenyellow',
+        padding: '20px',
+        fontWeight: 'bold',
+        fontSize: '30px',
+        textAlign: 'center'
+    },
+    
+    off:{
+        border: 'none',
+        color: 'red',
+        padding: '20px',
+        fontWeight: 'bold',
+        fontSize: '30px',
+        textAlign: 'center'
+    },
+
 }
 
 
 const Board = () => {
-
-    //const [light_red, onLightRed, offLightRed] = useLight(false)
-    //const [light_yellow, onLightYellow, offLightYellow] = useLight(false)
-    //const [light_green, onLightGreen, offLightGreen] = useLight(false)
-
-    
 
     const default_state = [
         { name: 'Roja', color: 'red', time: 20, is_on: false },
@@ -43,24 +56,27 @@ const Board = () => {
         { name: 'Verde', color: 'green', time: 45, is_on: false},
     ]
 
+    const [stateTrafLight, setTrafLight] = useState(false)
     const [lights, on_light, off_light] = useLight(default_state)
 
+   
     const on = () =>{
-        on_light("Roja")
-
+        setTrafLight(true)
+        on_light("Verde")
     }
 
     const off = () =>{
-        off_light("Roja")  
+        setTrafLight(false)
+        off_light("Verde")
     }
-    
     
     return(
         <section style={styles.board} >
+            <div>{stateTrafLight? <h2 style={styles.on} >Encedido</h2>:<h2 style={styles.off} >Apagado</h2>}</div>
             <Display lights={lights} />
             <div style={styles.panel}>
                 <button
-                    style={styles.on}
+                    style={styles.on_button}
                     type="button"
                     onClick={on}
                 >
@@ -68,7 +84,7 @@ const Board = () => {
                 </button>
 
                 <button
-                    style={styles.off}
+                    style={styles.off_button}
                     type="button"
                     onClick={off}
                 >

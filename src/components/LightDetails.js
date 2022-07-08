@@ -16,8 +16,9 @@ const LightDetails = ({details}) =>{
     
     return(
         <div style={styles.card } >
+            
             <label style = {styles.styleName} >Luz {details.name}</label>
-            <CountdownTimer />
+            <CountdownTimer details={details} />
         </div>
     )
 

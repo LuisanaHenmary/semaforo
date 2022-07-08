@@ -1,12 +1,4 @@
-import { useState, useEffect } from "react"
-
-const defaultRemainingTime = {
-    seconds: '00',
-}
-
-
-
-const CountdownTimer = () =>{
+const CountdownTimer = ({details}) =>{
 
     const styles = {
         styleCountdownTimer:{
@@ -15,11 +7,9 @@ const CountdownTimer = () =>{
         }
     }
 
-    const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
-
     return(
         <div style={styles.styleCountdownTimer }>
-            {remainingTime.seconds}
+            {details.time}
         </div>
     )
 }
